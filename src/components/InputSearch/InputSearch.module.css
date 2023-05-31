@@ -1,0 +1,102 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.37;
+  font-family: 'Manrope', sans-serif;
+}
+.form {
+  position: relative;
+}
+.input {
+  margin-top: 24px;
+  height: 44px;
+  width: 280px;
+  border-radius: 24px;
+  padding-left: 20px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.21;
+  box-shadow: var(--shadow-default);
+  border: none;
+  font-family: 'Inter';
+  color: #888888;
+  background-color: var(--color-wight);
+  outline: transparent;
+}
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #888888;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #888888;
+}
+
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: #888888;
+}
+
+.searchButton {
+  display: flex;
+  gap: 8px;
+  position: absolute;
+  right: 14px;
+  top: 37px;
+  background-color: transparent;
+  border: none;
+  width: 24px;
+  height: 24px;
+}
+.searchButtonDel {
+  position: absolute;
+  right: 38px;
+  top: 36px;
+}
+.searchDel {
+  position: absolute;
+  right: 6px;
+  top: 34px;
+}
+.changeColor,
+.changeColorDel {
+  color: var(--color-blue);
+
+  transition: all 150ms ease-in;
+}
+.changeColor:hover,
+.changeColor:focus,
+.changeColorDel:hover,
+.changeColorDel:focus {
+  color: var(--color-orange);
+}
+@media screen and (min-width: 768px) {
+  .title {
+    font-size: 48px;
+  }
+  .input {
+    width: 608px;
+    margin-top: 40px;
+    font-size: 20px;
+  }
+  .searchButton {
+    right: 14px;
+    top: 52px;
+  }
+  .searchButtonDel {
+    right: 50px;
+    top: 53px;
+  }
+  .searchDel {
+    right: 14px;
+    top: 50px;
+  }
+}
