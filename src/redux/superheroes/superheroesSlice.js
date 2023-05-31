@@ -1,149 +1,94 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
-  fetchAllNotices,
-  fetchNoticeById,
-  addToFavorite,
-  deleteFromFavorite,
-  fetchFavoriteNotices,
-  addNotice,
-  deleteNotice,
-  fetchNoticesByOwner,
+  fetchAllSuperheroes,
+  fetchSuperheroById,
+  addSuperhero,
+  deleteSuperhero,
+  updateSuperhero,
 } from './superheroesOperations';
 
-export const noticesSlice = createSlice({
-  name: 'notices',
+export const superheroesSlice = createSlice({
+  name: 'superheroes',
   initialState: {
-    oneNotice: {},
-    favList: [],
-    notices: [],
-    total: 0,
+    superheroes: [],
+    oneSuperhero: {},
     isLoading: false,
     error: null,
   },
-  extraReducers: builder =>
+  extraReducers: (builder) =>
     builder
-      .addCase(fetchAllNotices.pending, state => {
-        state.isLoading = true;
-        state.error = false;
+      .addCase(fetchAllSuperheroes.pending, (store) => {
+        store.loading = true;
       })
-      .addCase(fetchAllNotices.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.error = false;
-        state.notices = action.payload.result;
-        state.total = action.payload.total;
+      .addCase(fetchAllSuperheroes.fulfilled, (store, {payload}) => {
+        store.loading = false;
+        store.superheroes = payload;
       })
-      .addCase(fetchAllNotices.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload;
-        state.notices = [];
-        state.total = 0;
+      .addCase(fetchAllSuperheroes.rejected, (store, {payload}) => {
+        store.loading = false;
+        store.error = payload;
       })
-      .addCase(fetchNoticeById.pending, state => {
-        //state.isLoading = true;
-        state.error = false;
-      })
-      .addCase(fetchNoticeById.fulfilled, (state, action) => {
-        //state.isLoading = false;
-        state.error = false;
-        state.oneNotice = action.payload;
-      })
-      .addCase(fetchNoticeById.rejected, (state, action) => {
-        //state.isLoading = false;
-        state.error = action.payload;
-      })
-      .addCase(addToFavorite.pending, state => {
-        /* state.isLoading = true; */
-        state.error = false;
-      })
-      .addCase(addToFavorite.fulfilled, (state, action) => {
-        /* state.isLoading = false; */
-        state.error = false;
-        console.log(action.payload, 'paylaod from 59 ');
-        state.favList.push(action.payload.data.notice);
-      })
-      .addCase(addToFavorite.rejected, (state, action) => {
-        /* state.isLoading = false; */
-        state.error = action.payload;
-      })
-      .addCase(fetchFavoriteNotices.pending, state => {
-        state.isLoading = true;
-        state.error = false;
-      })
-      .addCase(fetchFavoriteNotices.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.error = false;
+      
 
-        state.favList = action.payload.result;
-        state.total = action.payload.count;
+      .addCase(fetchSuperheroById.pending, (store) => {
+        store.loading = true;
       })
-      .addCase(fetchFavoriteNotices.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload;
+      .addCase(fetchSuperheroById.fulfilled, (store, {payload}) => {
+        store.loading = false;
+        store.oneSuperhero = payload;
       })
-      .addCase(deleteFromFavorite.pending, state => {
-        /* state.isLoading = true; */
-        state.error = false;
+      .addCase(fetchSuperheroById.rejected, (store, {payload}) => {
+        store.loading = false;
+        store.error = payload;
       })
-      .addCase(deleteFromFavorite.fulfilled, (state, action) => {
-        /* state.isLoading = false; */
-        state.error = false;
-        const { favList } = state;
-        console.log(state, 'from splice 88');
-        console.log(action, 'from 89 slice');
-        const index = favList.findIndex(
-          notice => notice._id === action.payload._id
+  
+  
+      .addCase(addSuperhero.pending, (store) => {
+        store.loading = true;
+      })
+      .addCase(addSuperhero.fulfilled, (store, {payload}) => {
+        store.loading = false;
+        store.superheroes.push(payload);
+      })
+      .addCase(fetchSuperheroById.rejected, (store, {payload}) => {
+        store.loading = false;
+        store.error = payload;
+      })
+  
+  
+      .addCase(deleteSuperhero.pending, (store) => {
+        store.loading = true;
+      })
+      .addCase(deleteSuperhero.fulfilled, (store, {payload}) => {
+        store.loading = false;
+        const index = store.superheroes.findIndex(
+          (superhero) => superhero.id === payload
         );
-        favList.splice(index, 1);
+        if (index !== -1) {
+          store.superheroes.splice(index, 1);
+        }
       })
-      .addCase(deleteFromFavorite.rejected, (state, action) => {
-        /* state.isLoading = false; */
-        state.error = action.payload;
+      .addCase(deleteSuperhero.rejected, (store, {payload}) => {
+        store.loading = false;
+        store.error = payload;
       })
-      .addCase(addNotice.pending, state => {
-        /* state.isLoading = true; */
-        state.error = false;
+  
+  
+      .addCase(updateSuperhero.pending, (store) => {
+        store.loading = true;
       })
-      .addCase(addNotice.fulfilled, (state, action) => {
-        state.error = false;
-        /* state.isLoading = false; */
-      })
-      .addCase(addNotice.rejected, (state, action) => {
-        /* state.isLoading = false; */
-        state.error = action.payload;
-      })
-      .addCase(deleteNotice.pending, state => {
-        /* state.isLoading = true; */
-        state.error = false;
-      })
-      .addCase(deleteNotice.fulfilled, (state, action) => {
-        state.error = false;
-        /*  state.isLoading = false; */
-        const { notices } = state;
-
-        const indexNotice = notices.findIndex(
-          notice => notice._id === action.payload._id
+      .addCase(updateSuperhero.fulfilled, (store, {payload}) => {
+        const index = store.superheroes.findIndex(
+          (superhero) => superhero.id === payload.id
         );
-
-        notices.splice(indexNotice, 1);
+        if (index !== -1) {
+          store.superheroes[index] = payload;
+        }
       })
-      .addCase(deleteNotice.rejected, (state, action) => {
-        /* state.isLoading = false; */
-        state.error = action.payload;
+      .addCase(updateSuperhero.rejected, (store, {payload}) => {
+        store.loading = false;
+        store.error = payload;
       })
-      .addCase(fetchNoticesByOwner.pending, state => {
-        state.isLoading = true;
-        state.error = false;
-      })
-      .addCase(fetchNoticesByOwner.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.error = false;
-        state.notices = action.payload.result;
-        state.total = action.payload.total;
-      })
-      .addCase(fetchNoticesByOwner.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload;
-      }),
 });
 
-export const noticesSliceReducer = noticesSlice.reducer;
+export const superheroesSliceReducer = superheroesSlice.reducer;

@@ -1,64 +1,19 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
-import { instance } from '../auth/authOperations';
+const instance = axios.create({
+  baseURL: process.env.REACT_APP_API_URL,
+});
 
-export const fetchAllNotices = createAsyncThunk(
-  'notices/fetchAllNotices',
-  async function (queryParams, { rejectWithValue }) {
-    const { category, title, page } = queryParams;
-    try {
-      const response = await instance.get(
-        title
-          ? `/notices/${category}?title=${title}&page=${page}&limit=12`
-          : `/notices/${category}?page=${page}&limit=12`
-      );
-
-      if (response.status !== 200) {
-        throw new Error('Server Error');
-      }
-
-      return response.data;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
-
-export const fetchNoticeById = createAsyncThunk(
-  'notices/fetchNoticeById',
-  async function (id, { rejectWithValue }) {
-    try {
-      const response = await instance.get(`/notices/id/${id}`);
-
-      if (response.status !== 200) {
-        throw new Error('Server Error');
-      }
-
-      return response.data;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
-
-export const fetchFavoriteNotices = createAsyncThunk(
-  'notices/fetchFavorite',
+export const fetchAllSuperheroes = createAsyncThunk(
+  'superheroes/fetchAllSuperheroes',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await instance.get('/notices/fvrt?favorite=true');
+      const response = await instance.get('/superheroes/');
 
-      return response.data.data;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
-
-export const addToFavorite = createAsyncThunk(
-  'notices/addFavorite',
-  async (noticeId, { rejectWithValue }) => {
-    try {
-      const response = await instance.post(`/notices/${noticeId}/favorite`);
+      if (response.status !== 200) {
+        throw new Error('Server Error');
+      }
 
       return response.data;
     } catch (error) {
@@ -67,29 +22,28 @@ export const addToFavorite = createAsyncThunk(
   }
 );
 
-export const deleteFromFavorite = createAsyncThunk(
-  'notices/deleteFavorite',
-  async (noticeId, { rejectWithValue }) => {
+export const fetchSuperheroById = createAsyncThunk(
+  'superheroes/fetchSuperheroById',
+  async (id, { rejectWithValue }) => {
     try {
-      const response = await instance.delete(`/notices/${noticeId}/favorite`);
+      const response = await instance.get(`/superheroes/${id}`);
 
-      return response;
+      if (response.status !== 200) {
+        throw new Error('Server Error');
+      }
+
+      return response.data;
     } catch (error) {
       return rejectWithValue(error.message);
     }
   }
 );
 
-export const addNotice = createAsyncThunk(
-  'notices/addNotice',
-  async (FormData, thunkAPI) => {
-    const { token } = thunkAPI.getState().auth;
-    if (!token) {
-      return thunkAPI.rejectWithValue('No valid token');
-    }
-
+export const addSuperhero = createAsyncThunk(
+  'superheroes/addSuperhero',
+  async (formData, thunkAPI) => {
     try {
-      const { data } = await instance.post('/notices/', FormData);
+      const { data } = await instance.post('/superheroes/', formData);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -97,11 +51,11 @@ export const addNotice = createAsyncThunk(
   }
 );
 
-export const deleteNotice = createAsyncThunk(
-  'notices/deleteNotice',
+export const deleteSuperhero = createAsyncThunk(
+  'superheroes/deleteSuperhero',
   async (id, { rejectWithValue }) => {
     try {
-      const response = await instance.delete(`/notices/delete/${id}`);
+      const response = await instance.delete(`/superheroes/${id}`);
 
       return response.data;
     } catch (error) {
@@ -110,23 +64,16 @@ export const deleteNotice = createAsyncThunk(
   }
 );
 
-export const fetchNoticesByOwner = createAsyncThunk(
-  'notices/fetchNoticesByOwner',
-  async (queryParams, thunkApi) => {
-    const { title, page } = queryParams;
-    const { token } = thunkApi.getState().auth;
-    if (!token) return thunkApi.rejectWithValue('No valid token');
-
+export const updateSuperhero = createAsyncThunk(
+  'superheroes/updateSuperhero',
+  async ({ id, formData }, { rejectWithValue }) => {
     try {
-      const result = await instance.get(
-        title
-          ? `/notices/user?title=${title}&page=${page}&limit=12`
-          : `/notices/user?page=${page}&limit=12`
-      );
+      const response = await instance.put(`/superheroes/${id}/update`, formData);
 
-      return result.data;
+      return response.data;
     } catch (error) {
-      return thunkApi.rejectWithValue(error.message);
+      return rejectWithValue(error.message);
     }
   }
 );
+

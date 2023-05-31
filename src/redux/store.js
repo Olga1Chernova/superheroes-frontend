@@ -8,25 +8,13 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-import { persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
-import { noticesSliceReducer } from './superheroes/superheroesSlice';
-import { authReducer } from './auth/authSlice';
+import { superheroesSliceReducer } from './superheroes/superheroesSlice';
 import { filterReducer } from './filter/filterSlice';
-import { petsReducer } from './pets/petsSlice';
-
-const authPersistConfig = {
-  key: 'auth',
-  storage,
-  whitelist: ['token'],
-};
 
 export const store = configureStore({
   reducer: {
-    notices: noticesSliceReducer,
-    auth: persistReducer(authPersistConfig, authReducer),
+    superheroes: superheroesSliceReducer,
     filter: filterReducer,
-    pets: petsReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
