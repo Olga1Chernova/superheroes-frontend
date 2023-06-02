@@ -1,25 +1,32 @@
-import { lazy, Suspense } from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import Header from '../components/Header/Header';
-
-const MainPage = lazy(() => import('pages/MainPage/MainPage'));
-const AdditionalInfoPage = lazy(() => import('pages/AdditionalInfoPage/AdditionalInfoPage'));
-const EditInfoFormPage = lazy(() => import('pages/EditInfoFormPage/EditInfoFormPage'));
+const MainPage = lazy(() => import('../pages/MainPage/MainPage'));
+const AdditionalInfoPage = lazy(() =>
+  import('../pages/AdditionalInfoPage/AdditionalInfoPage')
+);
+const SuperheroCreateEditPage = lazy(() =>
+  import('../pages/SuperheroCreateEditPage/SuperheroCreateEditPage')
+);
 
 export const App = () => {
-  
   return (
     <>
       <Header />
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route path="/" element={<MainPage />} />
-          <Route path="/:id" element={<AdditionalInfoPage />} />
-          <Route path="/:id/update" element={<EditInfoFormPage />} />
+          <Route path="/:superheroId" element={<AdditionalInfoPage />} />
+          <Route
+            path="/:superheroId/update"
+            element={<SuperheroCreateEditPage />}
+          />
           <Route path="*" element={<MainPage />} />
         </Routes>
       </Suspense>
     </>
   );
 };
+
+

@@ -50,10 +50,11 @@ export const superheroesSlice = createSlice({
         store.loading = false;
         store.superheroes.push(payload);
       })
-      .addCase(fetchSuperheroById.rejected, (store, {payload}) => {
+      .addCase(addSuperhero.rejected, (store, {payload}) => {
         store.loading = false;
         store.error = payload;
       })
+
   
   
       .addCase(deleteSuperhero.pending, (store) => {

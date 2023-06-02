@@ -1,9 +1,10 @@
-import React from 'react'
-
+// import SuperheroList from "components/SuperheroList/SuperheroList";
 const MainPage = () => {
   return (
-    <div>MainPage</div>
+    <>
+      <h1>Some text</h1>
+    </>
   )
 }
 
-export default MainPage
+export default MainPage;

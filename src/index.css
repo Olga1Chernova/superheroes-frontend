@@ -1,6 +1,6 @@
-@import-normalize; /* bring in normalize.css styles */
+/* @import-normalize; /* bring in normalize.css styles */
 
-:root {
+/* :root {
   --color-orange: #ffc107;
   --color-light: #fdf7f2;
   --color-dark: #111111;
@@ -114,4 +114,4 @@ textarea {
   }
 }
 
-@import '../src/components/Pagination/pagination.css';
+@import '../src/components/Pagination/pagination.css'; */ 
