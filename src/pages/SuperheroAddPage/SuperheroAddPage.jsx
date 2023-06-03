@@ -31,6 +31,8 @@ const SuperheroAddPage = () => {
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
+        
+      values['superpowers'] = values['superpowers'].split(', ')    
       await dispatch(addSuperhero(values));
 
       Notiflix.Notify.success('Superhero created successfully');
