@@ -2,6 +2,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import Notiflix from 'notiflix';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { updateSuperhero } from '../../redux/superheroes/superheroesOperations';
 import css from './SuperheroEditPage.module.css';
@@ -26,10 +27,10 @@ const validationSchema = Yup.object().shape({
 
 const SuperheroEditPage = () => {
   const dispatch = useDispatch();
-
-  const { id } = useParams();
-
-  const handleSubmit = async (values, { setSubmitting, resetForm }, id) => {
+  const { id } = useParams(); 
+  const navigate = useNavigate();
+  
+  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
       values['superpowers'] = values['superpowers'].split(',');
       values['images'] = values['images'].split(',');
@@ -39,6 +40,7 @@ const SuperheroEditPage = () => {
 
       setSubmitting(false);
       resetForm();
+      navigate('/');
     } catch (error) {
       Notiflix.Notify.failure(
         `Failed to update superhero due to server error ${error.message}`
