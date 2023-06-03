@@ -24,28 +24,26 @@ const validationSchema = Yup.object().shape({
   images: Yup.array().of(Yup.string().url('Invalid image URL format')),
 });
 
-
 const SuperheroEditPage = () => {
   const dispatch = useDispatch();
 
   const { id } = useParams();
 
- const handleSubmit = async (values, { setSubmitting, resetForm }, id) => {
-   try {
-     await dispatch(updateSuperhero({ id, formData: values }));
-     
-     Notiflix.Notify.success('Superhero updated successfully');
-     
-     setSubmitting(false);
-     resetForm();
-   } catch (error) {
-     
-     Notiflix.Notify.failure(
-       `Failed to update superhero due to server error ${error.message}`
-     );
-     setSubmitting(false);
-   }
- };
+  const handleSubmit = async (values, { setSubmitting, resetForm }, id) => {
+    try {
+      await dispatch(updateSuperhero({ id, formData: values }));
+
+      Notiflix.Notify.success('Superhero updated successfully');
+
+      setSubmitting(false);
+      resetForm();
+    } catch (error) {
+      Notiflix.Notify.failure(
+        `Failed to update superhero due to server error ${error.message}`
+      );
+      setSubmitting(false);
+    }
+  };
 
   return (
     <div className={css.container}>
@@ -57,7 +55,7 @@ const SuperheroEditPage = () => {
           origin_description: '',
           superpowers: [],
           catch_phrase: '',
-          image: '',
+          images: '',
         }}
         validationSchema={validationSchema}
         onSubmit={(values, { setSubmitting, resetForm }) =>
@@ -152,17 +150,17 @@ const SuperheroEditPage = () => {
             </div>
 
             <div className={css.formControl}>
-              <label className={css.label} htmlFor="image">
-                Image:
+              <label className={css.label} htmlFor="images">
+                Images:
               </label>
               <Field
                 type="text"
-                id="image"
-                name="image"
+                id="images"
+                name="images"
                 className={css.input}
               />
               <ErrorMessage
-                name="image"
+                name="images"
                 component="div"
                 className={css.error}
               />

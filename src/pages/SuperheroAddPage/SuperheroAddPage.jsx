@@ -21,18 +21,17 @@ const validationSchema = Yup.object().shape({
       return Array.isArray(superpowersArray);
     }),
   catch_phrase: Yup.string().required('Catch phrase is required'),
-  image: Yup.string().url('Invalid image URL format'),
+  images: Yup.string().url('Invalid images URL format'),
 });
 
 const SuperheroAddPage = () => {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
-        
-      values['superpowers'] = values['superpowers'].split(', ')    
+      values['superpowers'] = values['superpowers'].split(',');
+      values['images'] = values['images'].split(',');
       await dispatch(addSuperhero(values));
 
       Notiflix.Notify.success('Superhero created successfully');
@@ -58,7 +57,7 @@ const SuperheroAddPage = () => {
           origin_description: '',
           superpowers: '',
           catch_phrase: '',
-          image: '',
+          images: '',
         }}
         validationSchema={validationSchema}
         onSubmit={(values, { setSubmitting, resetForm }) =>
@@ -153,17 +152,17 @@ const SuperheroAddPage = () => {
             </div>
 
             <div className={css.formControl}>
-              <label className={css.label} htmlFor="image">
-                Image:
+              <label className={css.label} htmlFor="images">
+                Images:
               </label>
               <Field
                 type="text"
-                id="image"
-                name="image"
+                id="images"
+                name="images"
                 className={css.input}
               />
               <ErrorMessage
-                name="image"
+                name="images"
                 component="div"
                 className={css.error}
               />
