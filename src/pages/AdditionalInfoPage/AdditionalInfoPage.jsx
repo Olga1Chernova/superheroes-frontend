@@ -48,11 +48,15 @@ const AdditionalInfoPage = () => {
       <p className={css.origin}>Origin: {superhero.origin_description}</p>
       <div className={css.superpowers}>
         <h3 className={css.superpowersTitle}>Superpowers:</h3>
-        <ul>
-          {superhero.superpowers.map((superpower, index) => (
-            <li key={index}>{superpower}</li>
-          ))}
-        </ul>
+        {superhero.superpowers ? (
+          <ul>
+            {superhero.superpowers.map((superpower, index) => (
+              <li key={index}>{superpower}</li>
+            ))}
+          </ul>
+        ) : (
+          <p className={css.noSuperpowers}>No superpowers available.</p>
+        )}
       </div>
       <p className={css.catchPhrase}>Catch Phrase: {superhero.catch_phrase}</p>
       <div className={css.imageCarousel}>
