@@ -21,7 +21,7 @@ const validationSchema = Yup.object().shape({
       return Array.isArray(superpowersArray);
     }),
   catch_phrase: Yup.string().required('Catch phrase is required'),
-  images: Yup.array().of(Yup.string().url('Invalid image URL format')),
+  images: Yup.string().url('Invalid images URL format'),
 });
 
 const SuperheroEditPage = () => {
@@ -31,6 +31,8 @@ const SuperheroEditPage = () => {
 
   const handleSubmit = async (values, { setSubmitting, resetForm }, id) => {
     try {
+      values['superpowers'] = values['superpowers'].split(',');
+      values['images'] = values['images'].split(',');
       await dispatch(updateSuperhero({ id, formData: values }));
 
       Notiflix.Notify.success('Superhero updated successfully');
