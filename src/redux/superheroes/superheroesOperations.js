@@ -48,7 +48,7 @@ export const addSuperhero = createAsyncThunk(
   'superheroes/addSuperhero',
   async (formData, thunkAPI) => {
     try {
-      const { data } = await instance.post('/superheroes/', formData);
+      const { data } = await instance.post('/superheroes/create', formData);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

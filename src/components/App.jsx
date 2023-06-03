@@ -9,6 +9,9 @@ const AdditionalInfoPage = lazy(() =>
 const SuperheroEditPage = lazy(() =>
   import('../pages/SuperheroEditPage/SuperheroEditPage')
 );
+const SuperheroAddPage = lazy(() =>
+  import('../pages/SuperheroAddPage/SuperheroAddPage')
+);
 
 export const App = () => {
   return (
@@ -22,6 +25,7 @@ export const App = () => {
             path="/info/:id/update"
             element={<SuperheroEditPage />}
           />
+          <Route path="/create" element={<SuperheroAddPage />} />
           <Route path="*" element={<MainPage />} />
         </Routes>
       </Suspense>

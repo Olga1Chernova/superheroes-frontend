@@ -1,16 +1,19 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { fetchAllSuperheroes } from '../../redux/superheroes/superheroesOperations';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import css from './SuperheroList.module.css';
 import defaultImg from '../../images/content/unknown-superhero.jpg';
 
 const SuperheroList = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const superheroes = useSelector(state => state.superheroes.superheroes);
   const currentPage = useSelector(state => state.superheroes.currentPage);
   const totalPages = useSelector(state => state.superheroes.totalPages);
+
 
   useEffect(() => {
     dispatch(fetchAllSuperheroes({ page: currentPage, limit: 5 }));
@@ -40,8 +43,18 @@ const SuperheroList = () => {
     }
   };
 
+  const handleCreateButtonClick = () => {
+    navigate('/create'); 
+  };
+
+
   return (
     <div>
+      <div className={css.buttonContainer}>
+        <button onClick={handleCreateButtonClick} className={css.createButton}>
+          Create Superhero
+        </button>
+      </div>
       <ul className={css.superheroList}>
         {superheroes.map(superhero => (
           <Link key={superhero._id} to={`info/${superhero._id}`}>
