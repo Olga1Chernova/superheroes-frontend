@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { fetchSuperheroById } from '../../redux/superheroes/superheroesOperations';
 import css from './AdditionalInfoPage.module.css'; // Import the CSS module
 
@@ -24,14 +24,17 @@ const AdditionalInfoPage = () => {
 
   return (
     <div className={css.additionalInfoPage}>
+      <Link to={`/info/${id}/update`} className={css.editButton}>
+        Edit info
+      </Link>
       <h2 className={css.superheroName}>{superhero.nickname}</h2>
       <p className={css.realName}>Real Name: {superhero.real_name}</p>
       <p className={css.origin}>Origin: {superhero.origin_description}</p>
       <div className={css.superpowers}>
         <h3 className={css.superpowersTitle}>Superpowers:</h3>
         <ul>
-          {superhero.superpowers.map((power, index) => (
-            <li key={index}>{power}</li>
+          {superhero.superpowers.map((superpower, index) => (
+            <li key={index}>{superpower}</li>
           ))}
         </ul>
       </div>
@@ -39,7 +42,7 @@ const AdditionalInfoPage = () => {
       <div className={css.imageCarousel}>
         {superhero.images.length > 0 ? (
           superhero.images.map((image, index) => (
-            <img key={index} src={image} alt='superhero images' />
+            <img key={index} src={image} alt="superhero images" />
           ))
         ) : (
           <p className={css.noImages}>No images available.</p>

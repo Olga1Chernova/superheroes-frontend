@@ -6,8 +6,8 @@ const MainPage = lazy(() => import('../pages/MainPage/MainPage'));
 const AdditionalInfoPage = lazy(() =>
   import('../pages/AdditionalInfoPage/AdditionalInfoPage')
 );
-const SuperheroCreateEditPage = lazy(() =>
-  import('../pages/SuperheroCreateEditPage/SuperheroCreateEditPage')
+const SuperheroEditPage = lazy(() =>
+  import('../pages/SuperheroEditPage/SuperheroEditPage')
 );
 
 export const App = () => {
@@ -20,7 +20,7 @@ export const App = () => {
           <Route path="/info/:id" element={<AdditionalInfoPage />} />
           <Route
             path="/info/:id/update"
-            element={<SuperheroCreateEditPage />}
+            element={<SuperheroEditPage />}
           />
           <Route path="*" element={<MainPage />} />
         </Routes>
