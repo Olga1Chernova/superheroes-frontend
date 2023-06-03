@@ -6,6 +6,7 @@ import {
   deleteSuperhero,
 } from '../../redux/superheroes/superheroesOperations';
 import css from './AdditionalInfoPage.module.css';
+import defaultImg from '../../images/content/unknown-superhero.jpg';
 
 const AdditionalInfoPage = () => {
   const { id } = useParams();
@@ -65,7 +66,7 @@ const AdditionalInfoPage = () => {
             <img key={index} src={image} alt="superhero images" />
           ))
         ) : (
-          <p className={css.noImages}>No images available.</p>
+          defaultImg
         )}
       </div>
     </div>
