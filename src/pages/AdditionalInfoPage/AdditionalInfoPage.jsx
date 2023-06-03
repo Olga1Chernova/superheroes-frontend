@@ -61,12 +61,12 @@ const AdditionalInfoPage = () => {
       </div>
       <p className={css.catchPhrase}>Catch Phrase: {superhero.catch_phrase}</p>
       <div className={css.imageCarousel}>
-        {superhero.images.length > 0 ? (
+        {superhero.images && superhero.images.length > 0 ? (
           superhero.images.map((image, index) => (
             <img key={index} src={image} alt="superhero images" />
           ))
         ) : (
-          defaultImg
+          <img src={defaultImg} alt="default superhero img" />
         )}
       </div>
     </div>
