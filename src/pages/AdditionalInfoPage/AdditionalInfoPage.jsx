@@ -10,7 +10,7 @@ import css from './AdditionalInfoPage.module.css';
 const AdditionalInfoPage = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const navigate = useNavigate(); // Use useNavigate to navigate after deletion
+  const navigate = useNavigate();
   const superhero = useSelector(state => state.superheroes.oneSuperhero);
   const isLoading = useSelector(state => state.superheroes.loading);
 
@@ -21,7 +21,7 @@ const AdditionalInfoPage = () => {
   const handleDelete = async () => {
     try {
       await dispatch(deleteSuperhero(id));
-      navigate('/'); // Navigate to the homepage after successful deletion
+      navigate('/'); 
     } catch (error) {
       console.error('Error deleting superhero:', error);
     }
