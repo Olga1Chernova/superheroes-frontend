@@ -30,7 +30,7 @@ const SuperheroEditPage = () => {
 
   const { id } = useParams();
 
- const handleSubmit = async (values, { setSubmitting }, resetForm) => {
+ const handleSubmit = async (values, { setSubmitting, resetForm }, id) => {
    try {
      await dispatch(updateSuperhero({ id, formData: values }));
      // Display success notification using Notiflix or any other library
@@ -40,7 +40,9 @@ const SuperheroEditPage = () => {
      resetForm();
    } catch (error) {
      // Display error notification using Notiflix or any other library
-     Notiflix.Notify.failure('Failed to update superhero');
+     Notiflix.Notify.failure(
+       `Failed to update superhero due to server error ${error.message}`
+     );
      setSubmitting(false);
    }
  };
@@ -53,12 +55,14 @@ const SuperheroEditPage = () => {
           nickname: '',
           real_name: '',
           origin_description: '',
-          superpowers: '',
+          superpowers: [],
           catch_phrase: '',
           image: '',
         }}
         validationSchema={validationSchema}
-        onSubmit={handleSubmit}
+        onSubmit={(values, { setSubmitting, resetForm }) =>
+          handleSubmit(values, { setSubmitting, resetForm }, id)
+        }
       >
         {({ isSubmitting }) => (
           <Form>

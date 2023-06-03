@@ -54,7 +54,7 @@
     font-style: italic;
 }
 
-.editButton {
+.editAndDeleteButtons {
     margin-bottom: 20px;
     display: inline-block;
     padding: 10px 20px;
@@ -63,9 +63,11 @@
     text-decoration: none;
     border-radius: 4px;
     transition: background-color 0.3s ease;
+    margin-left: 50px;
 }
 
-.editButton:hover {
+.editAndDeleteButtons:hover {
     background-color: red;
     color: #000;
 }
+
