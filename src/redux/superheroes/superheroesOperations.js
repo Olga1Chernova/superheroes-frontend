@@ -14,7 +14,6 @@ export const fetchAllSuperheroes = createAsyncThunk(
       if (response.status !== 200) {
         throw new Error('Server Error');
       }
-
       return response.data;
     } catch (error) {
       return rejectWithValue(error.message);

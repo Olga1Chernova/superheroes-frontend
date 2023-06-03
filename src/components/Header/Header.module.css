@@ -1,61 +1,51 @@
 .header {
-  position: absolute;
+  position: fixed;
   top: 0;
-  left: 50%;
-  z-index: 5;
-  padding-top: 20px;
-
-  transform: translateX(-50%);
-
-  @media (min-width: 768px) {
-    padding-top: 24px;
-  }
-
-  @media (min-width: 1280px) {
-    padding-top: 20px;
-    justify-content: start;
-  }
-}
-
-:global(.header_container) {
+  left: 0;
+  width: 100%;
+  height: 80px;
+  background-color: #f2f2f2;
   display: flex;
   align-items: center;
+  justify-content: center;
+  background-color: var(--color-dark);
+  border-bottom: 5px solid red;
 }
 
-.mobileMenu {
+.icon {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.icon:hover {
+  transform: rotate(90deg);
+}
+
+.iconContainer {
+  position: relative;
+}
+
+.text {
   position: absolute;
-  z-index: 1001;
-  top: -100%;
+  top: calc(100% + 8px);
   left: 50%;
   transform: translateX(-50%);
-
-  width: 100vw;
-  height: 100vh;
-  padding-top: 20px;
-
-  background-color: transparent;
-  visibility: hidden;
   opacity: 0;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: all ease-in 250ms;
+  visibility: hidden;
+  background-color: #000000;
+  color: red;
+  border: 1px solid red;
+  padding-right: 100px;
+  padding-left: 100px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
 }
-.show {
-  background-color: var(--color-light-background);
-  visibility: visible;
+
+.iconContainer:hover .text {
   opacity: 1;
-  top: 60px;
-}
-
-@media screen and (min-width: 768px) {
-  .show {
-    top: 70px;
-  }
-}
-@media screen and (min-width: 1280px) {
-  .mobileMenu {
-    display: none;
-  }
+  visibility: visible;
 }

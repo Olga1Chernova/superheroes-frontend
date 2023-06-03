@@ -1,6 +1,6 @@
-/* @import-normalize; /* bring in normalize.css styles */
+@import-normalize; 
 
-/* :root {
+:root {
   --color-orange: #ffc107;
   --color-light: #fdf7f2;
   --color-dark: #111111;
@@ -67,51 +67,6 @@ ol {
   list-style: none;
 }
 
-button,
-input,
-optgroup,
-select,
-textarea {
-  font-family: inherit;
-  font-size: 100%;
-  line-height: 1.15;
-  background-color: transparent;
-  padding: 0;
-  border: none;
-  cursor: pointer;
-}
 
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  border: 0;
-  padding: 0;
 
-  white-space: nowrap;
-  clip-path: inset(100%);
-  clip: rect(0 0 0 0);
-  overflow: hidden;
-}
-
-.container {
-  width: 320px;
-  padding-right: 20px;
-  padding-left: 20px;
-  margin: 0 auto;
-
-  @media screen and (min-width: 768px) {
-    width: 768px;
-    padding-right: 32px;
-    padding-left: 32px;
-  }
-
-  @media screen and (min-width: 1280px) {
-    width: 1280px;
-    padding-right: 16px;
-    padding-left: 16px;
-  }
-}
-
-@import '../src/components/Pagination/pagination.css'; */ 
+@import '../src/components/Pagination/pagination.css';
