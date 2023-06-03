@@ -1,0 +1,55 @@
+.additionalInfoPage {
+    margin-top: 120px;
+    text-align: center;
+}
+
+.superheroName {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.realName {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.origin {
+    margin-bottom: 20px;
+}
+
+.superpowers {
+    margin-bottom: 20px;
+}
+
+.superpowersTitle {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.catchPhrase {
+    margin-bottom: 20px;
+}
+
+.imageCarousel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    margin-bottom: 20px;
+}
+
+.imageCarousel img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    scroll-snap-align: center;
+    margin-right: 10px;
+}
+
+.noImages {
+    font-size: 16px;
+    font-style: italic;
+}

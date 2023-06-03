@@ -7,9 +7,14 @@ const instance = axios.create({
 
 export const fetchAllSuperheroes = createAsyncThunk(
   'superheroes/fetchAllSuperheroes',
-  async (_, { rejectWithValue }) => {
+  async ({ page, limit }, { rejectWithValue }) => {
     try {
-      const response = await instance.get('/superheroes/');
+      const response = await instance.get('/superheroes/', {
+        params: {
+          page,
+          limit,
+        },
+      });
 
       if (response.status !== 200) {
         throw new Error('Server Error');
@@ -21,11 +26,12 @@ export const fetchAllSuperheroes = createAsyncThunk(
   }
 );
 
+
 export const fetchSuperheroById = createAsyncThunk(
   'superheroes/fetchSuperheroById',
   async (id, { rejectWithValue }) => {
     try {
-      const response = await instance.get(`/superheroes/${id}`);
+      const response = await instance.get(`/superheroes/info/${id}`);
 
       if (response.status !== 200) {
         throw new Error('Server Error');
@@ -54,7 +60,7 @@ export const deleteSuperhero = createAsyncThunk(
   'superheroes/deleteSuperhero',
   async (id, { rejectWithValue }) => {
     try {
-      const response = await instance.delete(`/superheroes/${id}`);
+      const response = await instance.delete(`/superheroes/info/${id}/delete`);
 
       return response.data;
     } catch (error) {
@@ -67,7 +73,7 @@ export const updateSuperhero = createAsyncThunk(
   'superheroes/updateSuperhero',
   async ({ id, formData }, { rejectWithValue }) => {
     try {
-      const response = await instance.put(`/superheroes/${id}/update`, formData);
+      const response = await instance.put(`/superheroes/info/${id}/update`, formData);
 
       return response.data;
     } catch (error) {

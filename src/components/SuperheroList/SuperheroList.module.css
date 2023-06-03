@@ -1,9 +1,15 @@
+.superheroButton{
+    display: flex;
+    margin-top: 120px;
+    align-self: flex-end;
+}
+
 .superheroList {
    display: flex;
    flex-direction: row;
    align-items: baseline;
    justify-content: space-between;
-   margin-top: 80px;
+   margin-top: 120px;
    margin-left: 20px;
    margin-right: 20px;
 }
@@ -19,10 +25,59 @@
 
 .superheroImage {
     width: 100%;
-    height: 300px;
+    height: 250px;
     border-radius: 4px;
 }
 
 .superhero-nickname {
     margin-top: 10px;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.page {
+    padding: 8px 12px;
+    margin-right: 8px;
+    background-color: #f2f2f2;
+    color: #000;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.page:hover {
+    background-color: #dcdcdc;
+}
+
+.activePage {
+    padding: 8px 12px;
+    margin-right: 8px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.activePage:hover {
+    background-color: red;
+}
+
+.arrowButton {
+    padding: 8px 12px;
+    margin-right: 8px;
+    background-color: #000;
+    color: red;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
 }

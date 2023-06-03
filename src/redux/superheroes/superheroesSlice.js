@@ -12,21 +12,29 @@ export const superheroesSlice = createSlice({
   initialState: {
     superheroes: [],
     oneSuperhero: {},
-    isLoading: false,
+    totalItems: 0, 
+    currentPage: 1,
+    totalPages: 0, 
+    loading: false,
     error: null,
   },
   extraReducers: (builder) =>
     builder
-      .addCase(fetchAllSuperheroes.pending, (store) => {
-        store.loading = true;
+      .addCase(fetchAllSuperheroes.pending, state => {
+        state.loading = true;
+        state.error = null;
       })
-      .addCase(fetchAllSuperheroes.fulfilled, (store, {payload}) => {
-        store.loading = false;
-        store.superheroes = payload;
+      .addCase(fetchAllSuperheroes.fulfilled, (state, action) => {
+        state.superheroes = action.payload.superheroes;
+        state.totalItems = action.payload.totalItems;
+        state.currentPage = action.payload.currentPage;
+        state.totalPages = action.payload.totalPages;
+        state.loading = false;
+        state.error = null;
       })
-      .addCase(fetchAllSuperheroes.rejected, (store, {payload}) => {
-        store.loading = false;
-        store.error = payload;
+      .addCase(fetchAllSuperheroes.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       })
       
 
